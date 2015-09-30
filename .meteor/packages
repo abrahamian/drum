@@ -18,7 +18,7 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 
 sanjo:jasmine
 underscore
-fourseven:scss
+fourseven:scss@=2.1.1
 accounts-password
 accounts-ui
 alanning:roles
