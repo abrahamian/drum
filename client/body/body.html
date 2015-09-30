@@ -2,7 +2,7 @@
   {{>loginButtons}}
 
   {{#if currentUser}}
-    <h1>{{>user currentUser}}</h1>
+    <h1>{{>user userId=currentUser._id partial="profile"}}</h1>
   {{/if}}
 
 </body>
