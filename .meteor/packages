@@ -25,3 +25,4 @@ accounts-password
 accounts-ui
 alanning:roles
 reactive-var
+velocity:html-reporter
