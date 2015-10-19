@@ -1,3 +1,10 @@
 <template name="_profile">
-  <h1>{{username}}</h1>
+  
+  {{#if equals _id currentUser._id}}
+    <h1>{{username}}</h1>
+    <h3>(that's you!)</h3>
+  {{else}}
+    <h1>User Id: {{_id}}</h1>
+  {{/if}}
+
 </template>
