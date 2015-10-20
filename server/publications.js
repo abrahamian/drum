@@ -8,5 +8,21 @@ Meteor.publish("user", function(userId){
   } else {
     this.ready();
   }
+});
 
+Meteor.publish("user/sounds", function(userId){
+  if(this.userId == userId){
+    return Sounds.find({creatorId: userId});
+  } else {
+    this.ready();
+  }
+});
+
+Meteor.publish("sound/samples", function(soundId){
+  var sound = Sounds.findOne(soundId);
+  if(this.userId == sound.creatorId){
+    return Samples.find({soundId: soundId, creatorId: this.userId});
+  } else {
+    this.ready();
+  }
 });
