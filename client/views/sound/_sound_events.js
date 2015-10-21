@@ -6,7 +6,12 @@ Template._sound.events({
       'Samples/new', 
       {soundId: sound._id}, 
       function(error, sampleId) {
-        Session.set('selectedSampleId', sampleId);
+        if (error) {
+          // show a nice error message
+          alert(error.reason)
+        } else {
+          Session.set('selectedSampleId', sampleId);  
+        }
       }
     );
   },
