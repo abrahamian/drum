@@ -3,15 +3,25 @@
   <h3> {{sample._id}} (sound id: {{sample.soundId}}) </h3>
   <p>start time: {{sample.startTime}}</p>
   <p>duration: {{sample.duration}}</p>
-  <p>HPF: {{sample.highPassFilter.frequency}} Hz, {{sample.highPassFilter.slope}} db/octave</p>
-  <p>LPF: {{sample.lowPassFilter.frequency}} Hz, {{sample.lowPassFilter.slope}} db/octave</p>
 
 
   {{#if Template.subscriptionsReady}}
-    {{#if sampleBufferLoaded}}
-      {{>_sample_trigger}}
-    {{/if}}
-    {{>_sample_edit sample=sample soundPromise=soundPromise}}
+    <div class="row">
+      <div class="small-6 columns">
+        <div class="filter" data-filter-type="highPass">{{>_sample_filter sample.highPassFilter }}</div>
+        <div class="filter" data-filter-type="lowPass">{{>_sample_filter sample.lowPassFilter }}</div>
+      </div>
+
+      <div class="small-6 columns">
+        {{#if sampleBufferLoaded}}
+          {{>_sample_trigger}}
+        {{/if}}
+      </div>
+    </div>
+
+    <div class="row">
+      {{>_sample_edit sample=sample soundPromise=soundPromise}}
+    </div>
   {{/if}}
   
 </template>
