@@ -17,8 +17,23 @@ Template._sample_edit.onRendered(function() {
     });
   });
 
-  instance.wavesurfer.on('ready', function(){
+  instance.wavesurfer.on('ready', function() {
     instance.wavesurfer.enableDragSelection();
+
+    var replaceSampleRegion = function(newRegion) {
+      if(instance.sampleRegion){
+        instance.sampleRegion.remove();
+      }
+      instance.sampleRegion = newRegion;
+      instance.sampleRegion.element.classList.add('sample');
+    };
+
+    instance.wavesurfer.on('region-created', function(newRegion) {
+      replaceSampleRegion(newRegion);
+    });
+
   });
+
+
 
 });
