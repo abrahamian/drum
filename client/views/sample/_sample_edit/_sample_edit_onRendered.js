@@ -1,17 +1,3 @@
-Template._sample_edit.helpers({
-  'sample' : function(){
-    return Template.instance().sample();
-  },
-});
-
-Template._sample_edit.onCreated(function() {
-  var instance = this;
-  
-  instance.sample = function(){
-    return Samples.findOne(instance.data.sample._id);
-  }
-});
-
 Template._sample_edit.onRendered(function() {
   var instance=this;
 
@@ -29,6 +15,10 @@ Template._sample_edit.onRendered(function() {
     tape.render().then( function(buffer) {
       instance.wavesurfer.loadDecodedBuffer(buffer);
     });
+  });
+
+  instance.wavesurfer.on('ready', function(){
+    instance.wavesurfer.enableDragSelection();
   });
 
 });
