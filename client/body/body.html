@@ -5,7 +5,7 @@
   </div>
 
   {{#if currentUser}}
-  
+
     <div class="row">
       <div class="small-12 columns"><button class="new-drum-machine">New Drum Machine</button></div>
       <div class="small-12 columns">{{>user userId=currentUser._id partial="profile"}}</div>
@@ -16,7 +16,7 @@
       {{>_user_sounds userId=currentUser._id}}
       
       {{#with sessionVariable 'selectedSampleId'}}
-        {{>_sample}}
+        {{>_sample sampleId=this}}
       {{/with}}
     </div>
 
