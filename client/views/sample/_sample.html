@@ -1,3 +1,14 @@
 <template name="_sample">
+
   <h3> {{sample._id}} (sound id: {{sample.soundId}}) </h3>
+  <p>start time: {{sample.startTime}}</p>
+  <p>duration: {{sample.duration}}</p>
+  <p>HPF: {{sample.highPassFilter.frequency}} Hz, {{sample.highPassFilter.slope}} db/octave</p>
+  <p>LPF: {{sample.lowPassFilter.frequency}} Hz, {{sample.lowPassFilter.slope}} db/octave</p>
+
+
+  {{#if Template.subscriptionsReady}}
+    {{>_sample_edit sample=sample soundPromise=soundPromise}}
+  {{/if}}
+  
 </template>

@@ -26,3 +26,13 @@ Meteor.publish("sound/samples", function(soundId){
     this.ready();
   }
 });
+
+Meteor.publish("sound", function(soundId){
+    // TODO add security/authorization checks
+  return Sounds.find({_id: soundId});
+});
+
+Meteor.publish("sample", function(sampleId){
+    // TODO add security/authorization checks
+  return Samples.find({_id: sampleId});
+});
