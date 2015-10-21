@@ -3,8 +3,11 @@ Template._sample.helpers({
     return Template.instance().sample();
   },
 
+  'sampleBufferLoaded' : function() {
+    return Template.instance().sampleBufferLoaded.get();
+  },
+
   'soundPromise' : function() {
     return Template.instance().soundPromise;
   }
-  
 });

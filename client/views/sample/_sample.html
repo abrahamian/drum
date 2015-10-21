@@ -8,6 +8,9 @@
 
 
   {{#if Template.subscriptionsReady}}
+    {{#if sampleBufferLoaded}}
+      {{>_sample_trigger}}
+    {{/if}}
     {{>_sample_edit sample=sample soundPromise=soundPromise}}
   {{/if}}
   
