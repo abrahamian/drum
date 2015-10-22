@@ -7,69 +7,62 @@ Template._sample.onCreated(function() {
 
   instance.sampleBufferLoaded = new ReactiveVar(false);
 
+  instance.bufferNode = DrumApp.audioContext.createBufferSource();
+
   instance.trigger = function() {
-    var bufferNode = DrumApp.audioContext.createBufferSource();
-    bufferNode.buffer = instance.sampleBuffer;
-    bufferNode.connect(instance.highPassFilters[0]);
-    bufferNode.start(0);
+    instance.bufferNode = DrumApp.audioContext.createBufferSource();
+    instance.bufferNode.buffer = instance.sampleBuffer;
+    instance.bufferNode.connect(instance.highPassFilter.input());
+    instance.bufferNode.start(0);
+  };
+
+  var reactivelyControlFilters = function() {
+    instance.HPF = new ReactiveDict();
+    instance.LPF = new ReactiveDict();
+
+    instance.autorun(function(){
+      instance.HPF.set('frequency', instance.sample().highPassFilter.frequency);
+      instance.HPF.set('slope', instance.sample().highPassFilter.slope);
+      instance.LPF.set('frequency', instance.sample().lowPassFilter.frequency);
+      instance.LPF.set('slope', instance.sample().lowPassFilter.slope);
+    });
+
+    instance.autorun(function(){
+      instance.highPassFilter.setSlope(instance.HPF.get('slope'));
+    });
+
+    instance.autorun(function(){
+      instance.highPassFilter.setFrequency(instance.HPF.get('frequency'));
+    });
+
+    instance.autorun(function(){
+      instance.lowPassFilter.setSlope(instance.LPF.get('slope'));
+    });
+
+    instance.autorun(function(){
+      instance.lowPassFilter.setFrequency(instance.LPF.get('frequency'));
+    });
   };
 
   var initializeFilters = function() {
-    instance.highPassFilters = [];
-    instance.lowPassFilters = [];
-
-    //todo DRY this code up.
-    //use cascading filters for slopes steeper than 12dB/octave.
-    _.each(_.range(4), function(i) {
-      var hpf = DrumApp.audioContext.createBiquadFilter();
-      hpf.type = "highpass";
-      instance.highPassFilters[i] = hpf;
-
-      if(i>0){ instance.highPassFilters[i-1].connect(hpf); }
-
-      var lpf = DrumApp.audioContext.createBiquadFilter();
-      lpf.type = "lowpass";
-      instance.lowPassFilters.push(lpf);
-
-      if(i>0){ instance.lowPassFilters[i-1].connect(lpf); }
-    });
-
-    _.last(instance.highPassFilters).connect( _.first(instance.lowPassFilters));
-    _.last(instance.lowPassFilters).connect(DrumApp.audioContext.destination);
+    instance.highPassFilter = new DrumApp.CustomFilter({context: DrumApp.audioContext, type: "highpass", bypassedFrequency: 0, frequency: instance.sample().highPassFilter.frequency, slope: instance.sample().highPassFilter.slope});
+    instance.lowPassFilter = new DrumApp.CustomFilter({context: DrumApp.audioContext, type: "lowpass",  bypassedFrequency: 20000, frequency: instance.sample().lowPassFilter.frequency, slope: instance.sample().highPassFilter.slope});
+    instance.highPassFilter.output().connect(instance.lowPassFilter.input());
+    instance.lowPassFilter.output().connect(DrumApp.audioContext.destination);
   };
-
-  var updateFilters = function(){
-    //todo DRY this code up, as above.
-    var numHPFs = (instance.sample().highPassFilter.slope / 12);
-    _.each(instance.highPassFilters, function(filter, index) {
-      var frequency = index < numHPFs ? instance.sample().highPassFilter.frequency : 0 ;
-      filter.frequency.value = frequency;
-    });
-
-    var numLPFs = (instance.sample().lowPassFilter.slope / 12);
-    _.each(instance.lowPassFilters, function(filter, index) {
-      var frequency = index < numLPFs ? instance.sample().lowPassFilter.frequency : 20000 ;
-      filter.frequency.value = frequency;
-    });
-  };
-
-  initializeFilters();
 
   instance.autorun(function() {
     //subscribe to this instance's Sample.
     instance.subscribe('sample', Template.currentData().sampleId, function() {
-      
-      //once subscribed to sample, reactively update filters.
-      instance.autorun(function() {
-        instance.sample();
-        updateFilters();
-      });
+
+      initializeFilters();
+      reactivelyControlFilters();
 
       //once subscribed to sample, subscribe to its sound.
       instance.subscribe('sound', instance.sample().soundId, function() {
         //store the sound's audioBuffer promise in this instance.
         instance.soundPromise = instance.sample().sound().requestTape();
-      
+
         instance.autorun(function() {
           //when sample data changes, update this instance's samplePromise
           instance.sample();
@@ -90,4 +83,5 @@ Template._sample.onCreated(function() {
       });
     });
   });
+
 });

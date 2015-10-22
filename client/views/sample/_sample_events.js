@@ -4,8 +4,7 @@ Template._sample.events({
   },
 
   'input .filter' : function(event, instance) {
-    console.log(event);
-
+    
     var sampleId = instance.data.sampleId;
     var filterType = event.currentTarget.dataset.filterType;
     var modifiers = {};
