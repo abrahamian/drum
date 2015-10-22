@@ -9,11 +9,31 @@ Template._sample.onCreated(function() {
 
   instance.bufferNode = DrumApp.audioContext.createBufferSource();
 
-  instance.trigger = function() {
-    instance.bufferNode = DrumApp.audioContext.createBufferSource();
+  instance.schedulePlay = function(destination, time, velocity){
+    instance.bufferNode = destination.context.createBufferSource();
+
+    var fadeNode = destination.context.createGain();
+    
+    var fadeInCurve = DrumApp.FadeCurveBufferCreators[instance.sample().fadeIn.shape](1);
+    var fadeOutCurve = DrumApp.FadeCurveBufferCreators[instance.sample().fadeOut.shape](-1);
+
+    instance.bufferNode.disconnect();
     instance.bufferNode.buffer = instance.sampleBuffer;
-    instance.bufferNode.connect(instance.highPassFilter.input());
-    instance.bufferNode.start(0);
+    instance.bufferNode.connect(fadeNode);
+    fadeNode.connect(instance.highPassFilter.input());
+    instance.bufferNode.start(time);
+    
+    fadeNode.gain.setValueCurveAtTime(
+      fadeInCurve,
+      destination.context.currentTime,
+      Math.max(0.001, instance.sample().fadeIn.duration)
+    );
+
+    fadeNode.gain.setValueCurveAtTime(
+      fadeOutCurve,
+      destination.context.currentTime+instance.sample().duration,
+      Math.max(0.001, instance.sample().fadeOut.duration)
+    );
   };
 
   var reactivelyControlFilters = function() {
@@ -70,7 +90,7 @@ Template._sample.onCreated(function() {
 
           //slice out the sample and store its audioBuffer in this instance.
           instance.soundPromise.then(function(tape){
-            instance.samplePromise = tape.slice(instance.sample().startTime, instance.sample().duration).render();
+            instance.samplePromise = tape.slice(instance.sample().startTime - instance.sample().fadeIn.duration, instance.sample().duration + instance.sample().fadeOut.duration).render();
             
             instance.samplePromise.then(function(buffer) {
               instance.sampleBuffer = buffer;

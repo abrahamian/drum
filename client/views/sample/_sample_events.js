@@ -1,6 +1,6 @@
 Template._sample.events({
   'click .trigger' : function(event, instance) {
-    instance.trigger();
+    instance.schedulePlay(DrumApp.audioContext.destination, 0, 3);
   },
 
   'input .filter' : function(event, instance) {
@@ -24,5 +24,24 @@ Template._sample.events({
       sampleId,
       modifiers
     );
+  },
+
+  'change .fade' : function(event, instance){
+    var sampleId = instance.data.sampleId;
+    var fadeType = event.currentTarget.dataset.fadeType;
+    var modifiers = {};
+
+    if(event.target.classList.contains('shape')){
+      var shape = event.target.value;
+    }
+
+    modifiers["fade"+fadeType+".shape"] = shape;
+    
+    Meteor.call(
+      'Sample/update',
+      sampleId,
+      modifiers
+    );
   }
+
 });

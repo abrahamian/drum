@@ -5,11 +5,14 @@
   <p>duration: {{sample.duration}}</p>
 
 
-  <p>fadeIn: {{sample.fadeIn.duration}}</p>
-  <p>fadeOut: {{sample.fadeOut.duration}}</p>
-
-
   {{#if Template.subscriptionsReady}}
+
+    <div class="row">
+      fade in: <div class="fade" data-fade-type="In">{{>_sample_fade sample.fadeIn}}</div>
+      fade out: <div class="fade" data-fade-type="Out">{{>_sample_fade sample.fadeOut}}</div>
+    </div>
+
+
     <div class="row">
       <div class="small-6 columns">
         <div class="filter" data-filter-type="highPass">{{>_sample_filter sample.highPassFilter}}</div>
