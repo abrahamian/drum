@@ -1,6 +1,34 @@
 region.sample {
+  z-index: 3;
+
   handle {
     background-color: black;
     width: 2px !important;
+  }
+}
+
+region.fade {
+  z-index: 2;
+}
+
+region.fade-in{
+  handle.wavesurfer-handle-start {
+    background-color:green;
+    width: 5px !important;
+  }
+
+  handle.wavesurfer-handle-end {
+    display:none;
+  };
+}
+
+region.fade-out {
+  handle.wavesurfer-handle-start {
+    display:none;
+  };
+
+  handle.wavesurfer-handle-end {
+    background-color:green;
+    width: 5px !important;
   }
 }
