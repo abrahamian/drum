@@ -10,25 +10,48 @@ Template._sample.onCreated(function() {
   instance.trigger = function() {
     var bufferNode = DrumApp.audioContext.createBufferSource();
     bufferNode.buffer = instance.sampleBuffer;
-    bufferNode.connect(instance.highPassFilterNode);
+    bufferNode.connect(instance.highPassFilters[0]);
     bufferNode.start(0);
   };
 
   var initializeFilters = function() {
-    instance.highPassFilterNode = DrumApp.audioContext.createBiquadFilter();
-    instance.highPassFilterNode.type = "highpass";
+    instance.highPassFilters = [];
+    instance.lowPassFilters = [];
 
-    instance.lowPassFilterNode = DrumApp.audioContext.createBiquadFilter();
-    instance.lowPassFilterNode.type = "lowpass"
+    //todo DRY this code up.
+    //use cascading filters for slopes steeper than 12dB/octave.
+    _.each(_.range(4), function(i) {
+      var hpf = DrumApp.audioContext.createBiquadFilter();
+      hpf.type = "highpass";
+      instance.highPassFilters[i] = hpf;
 
-    instance.highPassFilterNode.connect(instance.lowPassFilterNode);
-    instance.lowPassFilterNode.connect(DrumApp.audioContext.destination);
+      if(i>0){ instance.highPassFilters[i-1].connect(hpf); }
+
+      var lpf = DrumApp.audioContext.createBiquadFilter();
+      lpf.type = "lowpass";
+      instance.lowPassFilters.push(lpf);
+
+      if(i>0){ instance.lowPassFilters[i-1].connect(lpf); }
+    });
+
+    _.last(instance.highPassFilters).connect( _.first(instance.lowPassFilters));
+    _.last(instance.lowPassFilters).connect(DrumApp.audioContext.destination);
   };
 
   var updateFilters = function(){
-    instance.highPassFilterNode.frequency.value = instance.sample().highPassFilter.frequency;
-    instance.lowPassFilterNode.frequency.value = instance.sample().lowPassFilter.frequency;    
-  }
+    //todo DRY this code up, as above.
+    var numHPFs = (instance.sample().highPassFilter.slope / 12);
+    _.each(instance.highPassFilters, function(filter, index) {
+      var frequency = index < numHPFs ? instance.sample().highPassFilter.frequency : 0 ;
+      filter.frequency.value = frequency;
+    });
+
+    var numLPFs = (instance.sample().lowPassFilter.slope / 12);
+    _.each(instance.lowPassFilters, function(filter, index) {
+      var frequency = index < numLPFs ? instance.sample().lowPassFilter.frequency : 20000 ;
+      filter.frequency.value = frequency;
+    });
+  };
 
   initializeFilters();
 
@@ -52,16 +75,18 @@ Template._sample.onCreated(function() {
           instance.sample();
           instance.sampleBufferLoaded.set(false);
 
+          //slice out the sample and store its audioBuffer in this instance.
           instance.soundPromise.then(function(tape){
             instance.samplePromise = tape.slice(instance.sample().startTime, instance.sample().duration).render();
             
             instance.samplePromise.then(function(buffer) {
-              //store the sample's audioBuffer in this instance.
               instance.sampleBuffer = buffer;
               instance.sampleBufferLoaded.set(true);
             });
           });
+
         });
+
       });
     });
   });
