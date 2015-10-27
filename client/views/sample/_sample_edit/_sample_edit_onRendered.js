@@ -53,7 +53,7 @@ Template._sample_edit.onRendered(function() {
 
     var initializeFadeInRegion = function(){
       instance.fadeInRegion = instance.wavesurfer.addRegion({
-        start: instance.sample().startTime - instance.sample().fadeIn.duration,
+        start: instance.sample().startTime - instance.sample().fades.in.duration,
         end: instance.sample().startTime,
         drag: false,
         resize: true,
@@ -73,7 +73,7 @@ Template._sample_edit.onRendered(function() {
     var initializeFadeOutRegion = function(){
       instance.fadeOutRegion = instance.wavesurfer.addRegion({
         start: instance.sample().startTime + instance.sample().duration,
-        end: instance.sample().startTime + instance.sample().duration + instance.sample().fadeOut.duration,
+        end: instance.sample().startTime + instance.sample().duration + instance.sample().fades.out.duration,
         drag: false,
         resize: true,
         id: "fade-out-region",
@@ -102,13 +102,13 @@ Template._sample_edit.onRendered(function() {
 
     var updateBothFadeRegionsWithSampleData = function(){
       instance.fadeInRegion.update({
-        start: instance.sample().startTime - instance.sample().fadeIn.duration,
+        start: instance.sample().startTime - instance.sample().fades.in.duration,
         end: instance.sample().startTime
       });
 
       instance.fadeOutRegion.update({
         start: instance.sample().startTime + instance.sample().duration,
-        end: instance.sample().startTime + instance.sample().duration + instance.sample().fadeOut.duration
+        end: instance.sample().startTime + instance.sample().duration + instance.sample().fades.out.duration
       });
     }
 
@@ -119,8 +119,8 @@ Template._sample_edit.onRendered(function() {
         {
           'startTime' : instance.sampleRegion.start,
           'duration': instance.sampleRegion.end - instance.sampleRegion.start,
-          'fadeIn.duration' : (instance.fadeInRegion.end - instance.fadeInRegion.start),
-          'fadeOut.duration' : (instance.fadeOutRegion.end - instance.fadeOutRegion.start)
+          'fades.in.duration' : (instance.fadeInRegion.end - instance.fadeInRegion.start),
+          'fades.out.duration' : (instance.fadeOutRegion.end - instance.fadeOutRegion.start)
         }
       );
     };
