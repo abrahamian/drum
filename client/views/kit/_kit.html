@@ -8,6 +8,7 @@
       {{/each}}
     </ul>
 
+    {{#if samplesCanBeAdded}}
     <!-- this part assumes the user has access to samples, at the app-level. -->
     <select class="samples-to-add">
       {{#each sample in userSamplesNotInKit}}
@@ -16,6 +17,7 @@
     </select>
 
     <input type="submit" class="add-sample-to-kit" value="add to kit">
+    {{/if}}
 
   </p>
 </template>

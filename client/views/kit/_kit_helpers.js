@@ -4,6 +4,10 @@ Template._kit.helpers({
     return Template.instance().kit();
   },
 
+  'samplesCanBeAdded' : function(){
+    return Template.instance().kit().sampleIds.length < 3;
+  },
+
   'userSamplesNotInKit' : function() {
     return Samples.find(
       {
