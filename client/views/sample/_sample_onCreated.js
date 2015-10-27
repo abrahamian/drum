@@ -21,13 +21,13 @@ Template._sample.onCreated(function() {
     
     
     fadeNode.gain.setValueCurveAtTime(
-      instance.sample().fadeInCurve(),
+      instance.sample().fadeCurve("in"),
       destination.context.currentTime,
       Math.max(0.001, instance.sample().fades.in.duration)
     );
 
     fadeNode.gain.setValueCurveAtTime(
-      instance.sample().fadeOutCurve(),
+      instance.sample().fadeCurve("out"),
       destination.context.currentTime+instance.sample().duration,
       Math.max(0.001, instance.sample().fades.out.duration)
     );
@@ -41,10 +41,10 @@ Template._sample.onCreated(function() {
     instance.LPF = new ReactiveDict();
 
     instance.autorun(function(){
-      instance.HPF.set('frequency', instance.sample().highPassFilter.frequency);
-      instance.HPF.set('slope', instance.sample().highPassFilter.slope);
-      instance.LPF.set('frequency', instance.sample().lowPassFilter.frequency);
-      instance.LPF.set('slope', instance.sample().lowPassFilter.slope);
+      instance.HPF.set('frequency', instance.sample().filters.highPass.frequency);
+      instance.HPF.set('slope', instance.sample().filters.highPass.slope);
+      instance.LPF.set('frequency', instance.sample().filters.lowPass.frequency);
+      instance.LPF.set('slope', instance.sample().filters.lowPass.slope);
     });
 
     instance.autorun(function(){
@@ -65,8 +65,8 @@ Template._sample.onCreated(function() {
   };
 
   var initializeFilters = function() {
-    instance.highPassFilter = new DrumApp.CustomFilter({context: DrumApp.audioContext, type: "highpass", bypassedFrequency: 0, frequency: instance.sample().highPassFilter.frequency, slope: instance.sample().highPassFilter.slope});
-    instance.lowPassFilter = new DrumApp.CustomFilter({context: DrumApp.audioContext, type: "lowpass",  bypassedFrequency: 20000, frequency: instance.sample().lowPassFilter.frequency, slope: instance.sample().highPassFilter.slope});
+    instance.highPassFilter = new DrumApp.CustomFilter({context: DrumApp.audioContext, type: "highpass", bypassedFrequency: 0, frequency: instance.sample().filters.highPass.frequency, slope: instance.sample().filters.highPass.slope});
+    instance.lowPassFilter = new DrumApp.CustomFilter({context: DrumApp.audioContext, type: "lowpass",  bypassedFrequency: 20000, frequency: instance.sample().filters.lowPass.frequency, slope: instance.sample().filters.highPass.slope});
     instance.highPassFilter.output().connect(instance.lowPassFilter.input());
     instance.lowPassFilter.output().connect(DrumApp.audioContext.destination);
   };
