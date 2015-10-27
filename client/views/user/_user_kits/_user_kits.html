@@ -1,0 +1,15 @@
+<template name="_user_kits">
+  
+  <div class="small-12 columns">
+    <h1>kits</h1>
+    <button class="new-kit">New Kit</button>
+  </div>
+
+  <ul>
+  {{#each userKits}}
+    <li> {{>_kit kitId=_id}} </li>    
+  {{/each}}
+  </ul>
+
+
+</template>
