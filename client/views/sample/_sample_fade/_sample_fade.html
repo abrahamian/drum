@@ -5,12 +5,15 @@
         <p>{{duration}} {{shape}}</p>
       </div>
       
+      <div>curve shape: {{>_sample_fade_curve}}</div>
+
       <div class="small-6 columns end">
         <select class="shape">
           <option value="linear">linear</option>
           <option value="exponential">exponential</option>
           <option value="logarithmic">logarithmic</option>
           <option value="cosine">cosine</option>
+          <option value="custom">custom</option>
         </select>
       </div>
     </div>

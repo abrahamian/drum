@@ -1,5 +1,34 @@
 var FadeCurveBufferCreators = {
 
+  custom: function(direction, controlPoints, length){
+    var length = 100;
+
+    var ppp = function (p) {
+      p.setup = function() {};
+    };
+    
+    vvv = new p5(ppp);
+
+    var cp1 = controlPoints[0];
+    var cp2 = controlPoints[1];
+
+    var curve = new Float32Array(length+1);
+
+    for (i = 0; i <= length; i++) {
+
+      var index = direction > 0 ? (i) : (length - i);
+
+      var t = i / length;
+      var x = vvv.bezierPoint(0, cp1.x, cp2.x, 100, t);
+      var y = 100 - vvv.bezierPoint(100, cp1.y, cp2.y, 0, t);
+      var yy = y/100;
+
+      curve[index] = yy;
+    }
+
+    return curve;
+  },
+
   cosine: function(direction, phase, length) {
     var phase = phase || Math.PI/2;
     var length = length || 100;

@@ -35,13 +35,29 @@ Template._sample.events({
       var shape = event.target.value;
     }
 
-    modifiers["fade"+fadeType+".shape"] = shape;
+    modifiers["fades."+fadeType+".shape"] = shape;
+
+    Meteor.call(
+      'Sample/update',
+      sampleId,
+      modifiers
+    );
+  },
+
+  'draw-curve .fade' : function(event, instance, options){
+    var sampleId = instance.data.sampleId;
+    var fadeType = event.currentTarget.dataset.fadeType;
+    var modifiers = {};
+
+    modifiers["fades."+fadeType+".controlPoints.0"] = options.controlPoints[0];
+    modifiers["fades."+fadeType+".controlPoints.1"] = options.controlPoints[1];
     
     Meteor.call(
       'Sample/update',
       sampleId,
       modifiers
     );
-  }
+  },
+
 
 });
