@@ -8,21 +8,23 @@
   {{#if Template.subscriptionsReady}}
 
     <div class="row">
-      fade in: <div class="fade" data-fade-type="in">{{>_sample_fade sample.fades.in}}</div>
-      fade out: <div class="fade" data-fade-type="out">{{>_sample_fade sample.fades.out}}</div>
-    </div>
-
-
-    <div class="row">
       <div class="small-6 columns">
-        <div class="filter" data-filter-type="highPass">{{>_sample_filter sample.highPassFilter}}</div>
-        <div class="filter" data-filter-type="lowPass">{{>_sample_filter sample.lowPassFilter}}</div>
+        <div class="fade" data-fade-type="in">{{>_sample_fade_curve sample.fades.in}}</div>
       </div>
 
       <div class="small-6 columns">
-        {{#if sampleBufferLoaded}}
-          {{>_sample_trigger}}
-        {{/if}}
+        <div class="fade" data-fade-type="out">{{>_sample_fade_curve sample.fades.out}}</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="small-6 columns">
+        <div class="filter" data-filter-type="highPass">{{>_sample_filter sample.filters.highPass}}</div>
+        <div class="filter" data-filter-type="lowPass">{{>_sample_filter sample.filters.lowPass}}</div>
+      </div>
+
+      <div class="small-6 columns">
+        <button class="trigger {{#unless sampleBufferLoaded}} secondary {{/unless}}"> trigger </button>
       </div>
     </div>
 

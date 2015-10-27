@@ -11,12 +11,12 @@ Template._sample.events({
 
     if(event.target.classList.contains('frequency')){
       var frequency = event.target.value * 200;
-      modifiers[filterType + 'Filter.frequency'] = frequency;  
+      modifiers['filters.' + filterType + '.frequency'] = frequency;  
     }
 
     if(event.target.classList.contains('slope')){
       var slope = event.target.value;
-      modifiers[filterType + 'Filter.slope'] = slope;
+      modifiers['filters.' + filterType + '.slope'] = slope;
     }
 
     Meteor.call(
