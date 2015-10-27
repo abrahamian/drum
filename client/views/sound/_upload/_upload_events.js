@@ -9,7 +9,13 @@ Template._upload.events({
         alert (error);
       }
       else {
-        Meteor.call('Sounds/new', {name: file.name});
+        Meteor.call(
+          'Sounds/new',
+          {name: file.name},
+          function(error, soundId){
+            console.log(soundId);
+          }
+        );
       }
     });
   }
