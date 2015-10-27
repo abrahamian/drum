@@ -1,7 +1,8 @@
-<template name="_sound_samples">    
+<template name="_sound_samples">
+  <button class="new-sample"> new sample</button>
   <ul>
     {{#each samples}}
-      <li><a href="/#">{{_id}}</a> {{name}} </li> 
+      <li><a href="/#">{{_id}}</a> {{name}} <input type="submit" value="remove sample" class="remove-sample"> </li> 
     {{/each}}
   </ul>
 </template>
