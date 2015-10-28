@@ -7,19 +7,19 @@
   {{#if currentUser}}
 
     <div class="row">
+      <div class="small-12 columns">{{>user userId=currentUser._id partial="profile"}}</div>
+    </div>
+
+    <div class="row">
       {{#with sessionVariable 'selectedSampleId'}}
         {{>_sample sampleId=this}}
       {{/with}}
     </div>
 
     <div class="row">
-      <div class="small-12 columns"><button class="new-drum-machine">New Drum Machine</button></div>
-      <div class="small-12 columns">{{>user userId=currentUser._id partial="profile"}}</div>
-    </div>
-
-    <div class="row">
       {{>_upload}}
       {{>_user_sounds userId=currentUser._id}}
+      {{>_user_kits userId=currentUser._id}}
     </div>
 
   {{/if}}

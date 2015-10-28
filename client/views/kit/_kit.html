@@ -1,0 +1,29 @@
+<template name="_kit">
+
+  {{#if Template.subscriptionsReady}}
+
+  <p> {{kit.name}} {{kit._id}}</p>
+  <p>
+
+    <ul>
+      {{#each kit.sampleIds}}
+        <li><a href="/#" class="select-sample">{{this}}</a> <input type="submit" class="remove-sample-from-kit" value="remove from kit"></li>
+      {{/each}}
+    </ul>
+
+    {{#if samplesCanBeAdded}}
+    <!-- this part assumes the user has access to samples, at the app-level. -->
+    <select class="samples-to-add">
+      {{#each sample in userSamplesNotInKit}}
+        <option value="{{sample._id}}">{{sample._id}} {{sample.name}}</option>
+      {{/each}}
+    </select>
+
+    <input type="submit" class="add-sample-to-kit" value="add to kit">
+    {{/if}}
+
+  </p>
+
+  {{/if}}
+  
+</template>

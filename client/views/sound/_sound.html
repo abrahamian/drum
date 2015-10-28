@@ -1,4 +1,7 @@
 <template name="_sound">
-  {{name}} <button class="new-sample"> new sample</button>
-  {{>_sound_samples soundId=_id}}
+  <h3>{{name}}</h3>
+  <input type="submit" value="remove sound" class="remove-sound">
+  <div>
+    {{>_sound_samples soundId=_id}}
+  </div>
 </template>

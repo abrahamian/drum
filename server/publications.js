@@ -18,6 +18,14 @@ Meteor.publish("user/sounds", function(userId){
   }
 });
 
+Meteor.publish("user/kits", function(userId){
+  if(this.userId == userId){
+    return Kits.find({creatorId: userId});
+  } else {
+    this.ready();
+  }
+});
+
 Meteor.publish("sound/samples", function(soundId){
   var sound = Sounds.findOne(soundId);
   if(this.userId == sound.creatorId){
@@ -25,6 +33,11 @@ Meteor.publish("sound/samples", function(soundId){
   } else {
     this.ready();
   }
+});
+
+Meteor.publish("kit", function(kitId){
+    // TODO add security/authorization checks
+  return Kits.find({_id: kitId});
 });
 
 Meteor.publish("sound", function(soundId){
