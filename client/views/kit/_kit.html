@@ -1,4 +1,7 @@
 <template name="_kit">
+
+  {{#if Template.subscriptionsReady}}
+
   <p> {{kit.name}} {{kit._id}}</p>
   <p>
 
@@ -20,4 +23,7 @@
     {{/if}}
 
   </p>
+
+  {{/if}}
+  
 </template>

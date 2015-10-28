@@ -10,9 +10,11 @@ Template._kit.events({
     var kitId = Template.currentData().kitId;
     var sampleId = this.toString();
 
+    //workaround while $addToSet and $pull modifiers are not supported by collection2 package.
+    var sampleIds = _.without( Kits.findOne(kitId).sampleIds, sampleId );
     var modifiers = {
-      $pull : {
-        sampleIds: sampleId,
+      $set : {
+        sampleIds: sampleIds
       }
     };
 
@@ -23,9 +25,11 @@ Template._kit.events({
     var kitId = Template.currentData().kitId;
     var sampleId = Template.instance().find('select').value;
 
+    //workaround while $addToSet and $pull modifiers are not supported by collection2 package.
+    var sampleIds = _.uniq( _.union(Kits.findOne(kitId).sampleIds, [sampleId]) );
     var modifiers = {
-      $push : {
-        sampleIds: sampleId,
+      $set : {
+        sampleIds: sampleIds
       }
     };
 
