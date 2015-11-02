@@ -12,7 +12,7 @@ Template._sound_samples.events({
           // show a nice error message
           alert(error.reason)
         } else {
-          Session.set('selectedSampleId', sampleId);  
+          FlowRouter.setQueryParams({'sample': sampleId});
         }
       }
     );
@@ -21,7 +21,7 @@ Template._sound_samples.events({
   'click li a' : function(event){
     event.preventDefault();
     var sample = this;
-    Session.set('selectedSampleId', sample._id);
+    FlowRouter.setQueryParams({'sample': sample._id});
   },
 
   'click .remove-sample' : function(event, instance){    

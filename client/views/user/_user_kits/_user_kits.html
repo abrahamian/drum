@@ -15,8 +15,8 @@
   </div>
 
   <div class="small-6 columns">
-    {{#if sessionVariable 'selectedKitId'}}
-      {{#with sessionVariable 'selectedKitId'}}
+    {{#if queryParam 'kit'}}
+      {{#with queryParam 'kit'}}
         {{>_kit kitId=this}}
       {{/with}}
     {{/if}}

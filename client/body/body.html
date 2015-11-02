@@ -11,9 +11,11 @@
     </div>
 
     <div class="row">
-      {{#with sessionVariable 'selectedSampleId'}}
-        {{>_sample sampleId=this}}
-      {{/with}}
+      {{#if queryParam 'sample'}}
+        {{#with queryParam 'sample'}}
+          {{>_sample sampleId=this}}
+        {{/with}}
+      {{/if}}
     </div>
 
     <div class="row">
