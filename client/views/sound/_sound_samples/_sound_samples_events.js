@@ -2,7 +2,6 @@ Template._sound_samples.events({
 
   'click .new-sample' : function(){
     var soundId = this.soundId;
-    console.log(this);
 
     Meteor.call(
       'Samples/new', 
@@ -12,6 +11,7 @@ Template._sound_samples.events({
           // show a nice error message
           alert(error.reason)
         } else {
+          console.log(sampleId);
           FlowRouter.setQueryParams({'sample': sampleId});
         }
       }

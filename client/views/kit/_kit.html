@@ -13,13 +13,14 @@
 
     {{#if samplesCanBeAdded}}
     <!-- this part assumes the user has access to samples, at the app-level. -->
-    <select class="samples-to-add">
-      {{#each sample in userSamplesNotInKit}}
-        <option value="{{sample._id}}">{{sample._id}} {{sample.name}}</option>
-      {{/each}}
-    </select>
-
-    <input type="submit" class="add-sample-to-kit" value="add to kit">
+      {{#if thereAreAnySamplesToBeAdded}}
+        <select class="samples-to-add">
+          {{#each sample in userSamplesNotInKit}}
+            <option value="{{sample._id}}">{{sample._id}} {{sample.name}}</option>
+          {{/each}}
+        </select>
+      <input type="submit" class="add-sample-to-kit" value="add to kit">
+      {{/if}}
     {{/if}}
 
   </p>
