@@ -22,17 +22,17 @@ Template._sample.onCreated(function() {
     
     fadeNode.gain.setValueCurveAtTime(
       instance.sample().fadeCurve("in"),
-      destination.context.currentTime,
+      (time - instance.sample().fades.in.duration),
       Math.max(0.001, instance.sample().fades.in.duration)
     );
 
     fadeNode.gain.setValueCurveAtTime(
       instance.sample().fadeCurve("out"),
-      destination.context.currentTime+instance.sample().duration,
+      (time + instance.sample().duration),
       Math.max(0.001, instance.sample().fades.out.duration)
     );
 
-    instance.bufferNode.start(time);
+    instance.bufferNode.start((time - instance.sample().fades.in.duration));
 
   };
 

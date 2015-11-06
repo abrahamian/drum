@@ -6,7 +6,7 @@
   </div>
 
 
-  <div class="small-6 columns">
+  <div class="small-12 columns">
     <ul class="user-drum-machines">
       {{#each userDrumMachines}}
         <li> <a href="/#" class="select-drum-machine">{{#if name}} {{name}} {{else}} {{_id}} {{/if}}</a> <input type="submit" value="remove drum machine" class="remove-drum-machine"> </li>    
@@ -14,7 +14,7 @@
     </ul>
   </div>
 
-  <div class="small-6 columns">
+  <div class="small-12 columns">
     {{#if queryParam 'drumMachine'}}
       {{#with queryParam 'drumMachine'}}
         {{>_drumMachine drumMachineId=this}}

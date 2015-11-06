@@ -32,4 +32,17 @@ Template._drumMachine.events({
     Meteor.call('DrumMachine/update', drumMachineId, modifiers);
   },
 
+  'click button.play' : function(event, instance){
+    instance.play();
+  },
+
+  'click button.pause' : function(event, instance){
+    instance.pause();
+  },
+
+  'click button.stop' : function(event, instance){
+    instance.stop();
+  },
+
+
 });

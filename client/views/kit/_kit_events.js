@@ -23,7 +23,7 @@ Template._kit.events({
 
   'click .add-sample-to-kit' : function(event, instance){
     var kitId = Template.currentData().kitId;
-    var sampleId = Template.instance().find('select').value;
+    var sampleId = Template.instance().find('select.samples-to-add').value;
 
     //workaround while $addToSet and $pull modifiers are not supported by collection2 package.
     var sampleIds = _.uniq( _.union(Kits.findOne(kitId).sampleIds, [sampleId]) );
