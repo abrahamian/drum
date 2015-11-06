@@ -11,17 +11,10 @@
     </div>
 
     <div class="row">
-      {{#if queryParam 'sample'}}
-        {{#with queryParam 'sample'}}
-          {{>_sample sampleId=this}}
-        {{/with}}
-      {{/if}}
-    </div>
-
-    <div class="row">
       {{>_upload}}
       {{>_user_sounds userId=currentUser._id}}
       {{>_user_kits userId=currentUser._id}}
+      {{>_user_drumMachines userId=currentUser._id}}
     </div>
 
   {{/if}}

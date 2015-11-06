@@ -75,33 +75,39 @@ Template._sample.onCreated(function() {
     //subscribe to this instance's Sample.
     instance.subscribe('sample', Template.currentData().sampleId, function() {
 
-      initializeFilters();
-      reactivelyControlFilters();
+      if(instance.sample()){
+        
+        initializeFilters();
+        reactivelyControlFilters();      
 
-      //once subscribed to sample, subscribe to its sound.
-      instance.subscribe('sound', instance.sample().soundId, function() {
-        //store the sound's audioBuffer promise in this instance.
-        instance.soundPromise = instance.sample().sound().requestTape();
+        //once subscribed to sample, subscribe to its sound.
+        instance.subscribe('sound', instance.sample().soundId, function() {
+          //store the sound's audioBuffer promise in this instance.
+          instance.soundPromise = instance.sample().sound().requestTape();
 
-        instance.autorun(function() {
-          //when sample data changes, update this instance's samplePromise
-          instance.sample();
-          instance.sampleBufferLoaded.set(false);
+          instance.autorun(function() {
+            //when sample data changes, update this instance's samplePromise
+            instance.sample();
+            instance.sampleBufferLoaded.set(false);
 
-          //slice out the sample and store its audioBuffer in this instance.
-          instance.soundPromise.then(function(tape){
-            instance.samplePromise = tape.slice(instance.sample().startTime - instance.sample().fades.in.duration, instance.sample().duration + instance.sample().fades.out.duration).render();
-            
-            instance.samplePromise.then(function(buffer) {
-              instance.sampleBuffer = buffer;
-              instance.sampleBufferLoaded.set(true);
+            //slice out the sample and store its audioBuffer in this instance.
+            instance.soundPromise.then(function(tape){
+              instance.samplePromise = tape.slice(instance.sample().startTime - instance.sample().fades.in.duration, instance.sample().duration + instance.sample().fades.out.duration).render();
+              
+              instance.samplePromise.then(function(buffer) {
+                instance.sampleBuffer = buffer;
+                instance.sampleBufferLoaded.set(true);
+              });
             });
+
           });
 
         });
 
-      });
+      }
+
     });
+
   });
 
 });

@@ -1,11 +1,13 @@
 <template name="_sample">
 
-  <h3> {{sample._id}} (sound id: {{sample.soundId}}) </h3>
-  <p>start time: {{sample.startTime}}</p>
-  <p>duration: {{sample.duration}}</p>
+  <!-- <h3> {{sample._id}} (sound id: {{sample.soundId}}) </h3> -->
+  <!-- <p>start time: {{sample.startTime}}</p> -->
+  <!-- <p>duration: {{sample.duration}}</p> -->
 
 
   {{#if Template.subscriptionsReady}}
+
+    {{#if sample}}
 
     <div class="row">
       <div class="small-6 columns">
@@ -31,7 +33,8 @@
     <div class="row">
       {{>_sample_edit sample=sample soundPromise=soundPromise}}
     </div>
-    
+
+    {{/if}}
   {{/if}}
   
 </template>
