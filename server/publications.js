@@ -34,6 +34,13 @@ Meteor.publish("user/drumMachines", function(userId){
   }
 });
 
+Meteor.publish("user/measures", function(userId){
+  if(this.userId == userId){
+    return Measures.find({creatorId: userId});
+  } else {
+    this.ready();
+  }
+});
 
 Meteor.publish("sound/samples", function(soundId){
   var sound = Sounds.findOne(soundId);
@@ -62,4 +69,9 @@ Meteor.publish("sound", function(soundId){
 Meteor.publish("sample", function(sampleId){
     // TODO add security/authorization checks
   return Samples.find({_id: sampleId});
+});
+
+Meteor.publish("measure", function(measureId){
+    // TODO add security/authorization checks
+  return Measures.find({_id: measureId});
 });

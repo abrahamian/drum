@@ -11,9 +11,11 @@
     </div>
 
     <div class="row">
+      <!-- todo move upload template into _user_sounds -->
       {{>_upload}}
       {{>_user_sounds userId=currentUser._id}}
       {{>_user_kits userId=currentUser._id}}
+      {{>_user_measures userId=currentUser._id}}
       {{>_user_drumMachines userId=currentUser._id}}
     </div>
 
