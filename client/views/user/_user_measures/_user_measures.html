@@ -5,7 +5,7 @@
     <button class="new-measure">New Measure</button>
   </div>
 
-  <div class="small-6 columns">
+  <div class="small-12 columns">
     <ul class="user-measures">
       {{#each userMeasures}}
         <li> <a href="/#" class="select-measure"> {{_id}} {{name}} </a> <input type="submit" value="remove measure" class="remove-measure"> </li>    
@@ -13,7 +13,7 @@
     </ul>
   </div>
 
-  <div class="small-6 columns">
+  <div class="small-12 columns">
     {{#if queryParam 'measure'}}
       {{#with queryParam 'measure'}}
         {{>_measure measureId=this}}

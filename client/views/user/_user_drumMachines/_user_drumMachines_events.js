@@ -3,7 +3,6 @@ Template._user_drumMachines.events({
   'click ul.user-drum-machines li a.select-drum-machine' : function(event){
     event.preventDefault();
     var drumMachine = this;
-    console.log(this);
     FlowRouter.setQueryParams({'drumMachine': drumMachine._id});
   },
 

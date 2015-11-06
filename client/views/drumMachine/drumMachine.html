@@ -1,10 +1,14 @@
 <template name="_drumMachine">
-  
+{{#if Template.subscriptionsReady}}
+{{#if drumMachine}}
+
+
   <input class="edit-in-place" type="text" value="{{drumMachine.name}}">
   <p>tempo {{drumMachine.tempo}}</p>
   <p>measureId {{drumMachine.measureId}}</p>
   <p>kitId {{drumMachine.kitId}}</p>
 
+  <!-- todo fix select boxes as their default value is the first option, but clicking on that option doesn't emit change event-->
   <select class="select-drumMachine-kit">
     {{#each kit in userKits}}
       <option value="{{kit._id}}">{{kit._id}} {{kit.name}}</option>
@@ -17,4 +21,6 @@
     {{/each}}
   </select>
 
+{{/if}}
+{{/if}}
 </template>
