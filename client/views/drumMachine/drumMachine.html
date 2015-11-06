@@ -1,0 +1,14 @@
+<template name="_drumMachine">
+  
+  <input class="edit-in-place" type="text" value="{{drumMachine.name}}">
+  <p>{{drumMachine.tempo}}</p>
+  <p>{{drumMachine.measureId}}</p>
+  <p>{{drumMachine.kitId}}</p>
+
+  <select class="select-drumMachine-kit">
+    {{#each kit in userKits}}
+      <option value="{{kit._id}}">{{kit._id}} {{kit.name}}</option>
+    {{/each}}
+  </select>
+
+</template>

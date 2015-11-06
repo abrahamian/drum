@@ -26,6 +26,15 @@ Meteor.publish("user/kits", function(userId){
   }
 });
 
+Meteor.publish("user/drumMachines", function(userId){
+  if(this.userId == userId){
+    return DrumMachines.find({creatorId: userId});
+  } else {
+    this.ready();
+  }
+});
+
+
 Meteor.publish("sound/samples", function(soundId){
   var sound = Sounds.findOne(soundId);
   if(this.userId == sound.creatorId){
@@ -33,6 +42,11 @@ Meteor.publish("sound/samples", function(soundId){
   } else {
     this.ready();
   }
+});
+
+Meteor.publish("drumMachine", function(drumMachineId){
+    // TODO add security/authorization checks
+  return DrumMachines.find({_id: drumMachineId});
 });
 
 Meteor.publish("kit", function(kitId){
