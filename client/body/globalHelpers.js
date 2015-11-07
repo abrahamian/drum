@@ -9,3 +9,7 @@ Template.registerHelper('logMe', function(a){
 Template.registerHelper('sessionVariable', function(a){
   return Session.get(a);
 });
+
+Template.registerHelper('queryParam', function(a){
+  return FlowRouter.getQueryParam(a);
+});

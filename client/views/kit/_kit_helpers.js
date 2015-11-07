@@ -14,6 +14,14 @@ Template._kit.helpers({
         _id: { $nin: Template.instance().kit().sampleIds }
       }
     );
-  }
+  },
 
+  'thereAreAnySamplesToBeAdded' : function(){
+    return Samples.find(
+      {
+        _id: { $nin: Template.instance().kit().sampleIds }
+      }
+    ).count() > 0;
+  }
+  
 });

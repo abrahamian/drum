@@ -1,0 +1,21 @@
+.measure {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.beat {
+  &.current {
+    .cell {
+      border: 1px solid orange;
+    }
+  }
+}
+
+.cell {
+  height:20px;
+  border: 1px dotted black;
+
+  &.velocity-1 { background: cyan; }
+  &.velocity-2 { background: blue; }
+  &.velocity-3 { background: darkblue; }
+}

@@ -3,7 +3,7 @@ Template._user_kits.events({
   'click ul.user-kits li a.select-kit' : function(event){
     event.preventDefault();
     var kit = this;
-    Session.set('selectedKitId', kit._id);
+    FlowRouter.setQueryParams({'kit': kit._id});
   },
 
   'click button.new-kit' : function(event, instance){
@@ -11,7 +11,7 @@ Template._user_kits.events({
       'Kits/new',
       {},
       function(error, kitId){
-        Session.set('selectedKitId', kitId);
+        FlowRouter.setQueryParams({'kit': kitId});
       }
     );
   },

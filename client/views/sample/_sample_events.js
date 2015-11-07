@@ -1,6 +1,13 @@
 Template._sample.events({
+
+
+
   'click .trigger' : function(event, instance) {
-    instance.schedulePlay(DrumApp.audioContext.destination, 0, 3);
+    instance.schedulePlay(DrumApp.audioContext.destination, DrumApp.audioContext.currentTime, 3);
+  },
+
+  'schedule .trigger' : function(event, instance, data) {
+    instance.schedulePlay(data.destination, data.time, data.velocity);
   },
 
   'input .filter' : function(event, instance) {
