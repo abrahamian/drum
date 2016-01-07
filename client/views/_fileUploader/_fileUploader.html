@@ -1,0 +1,18 @@
+<template name="_fileUploader">
+  <div class="file-uploader {{className}}">
+    <h3> {{title}} </h3>
+    {{> _fileUploader_form }}
+    {{> _progressBar progress=progress }}
+  </div>
+</template>
+
+<template name="_fileUploader_form">
+  <div class="upload-area">
+    <form id="upload">
+      <p class="alert alert-success text-center">
+        <span>Click or Drag a File Here to Upload</span>
+        <input type="file">
+      </p>
+    </form>
+  </div>
+</template>

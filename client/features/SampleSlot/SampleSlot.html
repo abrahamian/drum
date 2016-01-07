@@ -1,0 +1,12 @@
+<template name="SampleSlot">
+<div class="sample-slot">
+{{#if Template.subscriptionsReady }}
+  {{#if sample}}
+    <span> {{sampleId}} </span> {{> _triggerSample triggerData }}
+    {{> _unloadSample unloadData}}
+  {{else}}
+    {{> _loadSample loadData}}
+  {{/if}}
+{{/if}}
+</div>
+</template>

@@ -1,0 +1,30 @@
+<template name="DrumMachineBox">
+<div class="drum-machine-box row">    
+{{#if Template.subscriptionsReady }}
+
+  <div class="small-8 columns">
+    <div class="row">
+      <div class="small-12 columns">
+        {{> MeasureBox measureId=drumMachine.measureId }}
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="small-6 columns">
+        {{> _transportButtons transportData }}
+      </div>
+      
+      <div class="small-6 columns">
+        {{> _slider tempoSliderData }}
+      </div>
+
+    </div>
+  </div>
+
+  <div class="small-4 columns">
+    {{> KitRack kitId=drumMachine.kitId }}
+  </div>
+
+{{/if}}
+</div>
+</template>

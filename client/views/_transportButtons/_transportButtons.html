@@ -1,0 +1,15 @@
+<template name="_transportButtons">
+<div class="transport-buttons">
+  <button class="{{#if playing}} pause {{else}} play {{/if}}">
+    {{#if playing}}
+      pause
+    {{else}}
+      play
+    {{/if}}
+  </button>
+
+  <button class="stop">
+    stop
+  </button>
+</div>
+</template>

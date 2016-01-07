@@ -1,0 +1,8 @@
+<template name="SoundsBox">
+  <div class="sounds-box">
+    {{#if Template.subscriptionsReady }}
+      {{> _fileUploader soundUploaderData }}
+      {{> _soundsList soundsListData }}
+    {{/if}}
+  </div>
+</template>

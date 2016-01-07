@@ -1,0 +1,8 @@
+<template name="_loadSample">
+  <select class="select-sample">
+    <option></option>
+    {{#each sample in samples}}
+      <option value="{{sample._id}}">{{sample._id}} {{sample.name}}</option>
+    {{/each}}
+  </select>
+</template>

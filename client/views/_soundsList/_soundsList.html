@@ -1,0 +1,14 @@
+<template name="_soundsList">
+<div class="sounds-list">
+  <h1>Sounds</h1>
+  <ul>
+    {{#each sounds}}
+      <li >
+        <a href="#/" class="select-sound">sound {{ _id }}</a>
+        <input type="submit" value="remove sound" class="remove-sound">
+      </li>
+      {{>SamplesBox parentCollectionName="Sound" parentId=_id}}
+    {{/each}}
+  </ul>
+</div>
+</template>

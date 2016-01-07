@@ -1,24 +1,13 @@
 <body>
-
   <div class="row">
     {{>loginButtons}}
   </div>
-
-  {{#if currentUser}}
-
-    <div class="row">
-      <div class="small-12 columns">{{>user userId=currentUser._id partial="profile"}}</div>
-    </div>
-
-    <div class="row">
-      <!-- todo move upload template into _user_sounds -->
-      {{>_upload}}
-      {{>_user_sounds userId=currentUser._id}}
-      {{>_user_kits userId=currentUser._id}}
-      {{>_user_measures userId=currentUser._id}}
-      {{>_user_drumMachines userId=currentUser._id}}
-    </div>
-
-  {{/if}}
+  
+  <div class="row">
+    {{#if currentUser}}
+      {{> DrumMachineBox }}
+      {{> SoundsBox subscriptionName="user/sounds" }}
+    {{/if}}
+  </div>
 
 </body>

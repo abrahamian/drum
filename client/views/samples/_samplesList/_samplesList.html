@@ -1,0 +1,14 @@
+<template name="_samplesList">
+  <div class="samples-list">
+    <ul>
+      {{#each samples}}
+        <li>
+          <a class="select-sample" href="/#">
+            {{_id}} {{name}}
+          </a>
+          <input type="submit" value="remove sample" class="remove-sample">
+        </li> 
+      {{/each}}
+    </ul>
+  </div>
+</template>

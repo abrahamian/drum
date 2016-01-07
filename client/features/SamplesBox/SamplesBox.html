@@ -1,0 +1,8 @@
+<template name="SamplesBox">
+<div class="samples-box">
+{{#if Template.subscriptionsReady }}
+  {{> _newSample handleClick=createNewSample }}
+  {{> _samplesList samplesListData }}
+{{/if}}
+</div>
+</template>
