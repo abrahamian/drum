@@ -1,0 +1,38 @@
+.sample-slot {
+  border: 1px solid;
+  border-color: $sample-slot-active-color;
+  height: $sample-slot-height;
+}
+
+.sample-slot > .columns { height:100%; }
+
+.sample-slot .controls {
+  background: $sample-slot-active-color;
+  .control { 
+    color: black; 
+    cursor: pointer;
+  }
+  .control .active { color: white; } 
+  .control *:hover { color: white; }
+}
+
+.sample-slot.mute {
+  border-color: $sample-slot-inactive-color;
+  color: $sample-slot-inactive-color;
+  .controls { background: $sample-slot-inactive-color; }
+}
+
+  //todo: refactor rule.
+  //when not muted, 2 controls fill lower two thirds of .controls container
+.sample-slot:not(.mute) .controls .control {
+  position: relative;
+  top: (1/3)*100%;
+  height: (1/3)*100%;
+}
+
+  //when muted, single control fills .control container.
+.sample-slot.mute .controls .control.toggle-mute {
+  position: static;
+  *:hover { color: $sample-slot-active-color; }
+  height: 100%;
+}

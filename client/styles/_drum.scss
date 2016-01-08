@@ -1,3 +1,11 @@
+@import 'drum/utilities';
+@import 'drum/variables';
+
+@import 'drum/features/sample-slot';
+@import 'drum/features/drum-machine-box';
+@import 'drum/features/kit-rack';
+@import 'drum/features/sample-edit';
+
 @import 'drum/components/upload-area';
-@import 'drum/components/sample-edit';
 @import 'drum/components/measure';
+@import 'drum/components/toggle';

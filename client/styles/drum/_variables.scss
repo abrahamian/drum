@@ -1,0 +1,7 @@
+$drum-machine-box-height: 250px;
+$drum-machine-box-max-width: 850px;
+
+$number-of-slots: 3;
+$sample-slot-height: 1/($number-of-slots) * 100% ;
+$sample-slot-active-color: pink;
+$sample-slot-inactive-color: #ddd;

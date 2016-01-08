@@ -1,0 +1,10 @@
+.drum-machine-box {
+
+  height: $drum-machine-box-height;
+  max-width: $drum-machine-box-max-width;
+
+  & > .columns {
+    height:100%;
+  }
+
+}
