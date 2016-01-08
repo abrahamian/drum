@@ -20,7 +20,6 @@ Template.SampleSlot.helpers({
   'powerButtonData' : function(){
     return {
       active: Template.instance().mute.get(),
-      // className: 'toggle-mute',
       iconName: 'power-off',
       handleClick: Template.instance().togglePower,
     }
@@ -29,7 +28,6 @@ Template.SampleSlot.helpers({
   'gearButtonData' : function(){
     return {
       active: (FlowRouter.getQueryParam('sample') === Template.instance().data.sampleId),
-      // className: 'select-sample',
       iconName: 'cog',
       handleClick: Template.instance().selectSample,
     }
