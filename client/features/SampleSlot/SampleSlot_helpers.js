@@ -2,10 +2,36 @@ Template.SampleSlot.helpers({
   sample: function(){
     return Template.instance().sample();
   },
+
+  sampleBufferLoaded: function(){
+    return Template.instance().sampleBufferLoaded.get();
+  },
   
   'triggerData': function(){
     return {
       handleTrigger: Template.instance().schedulePlay
+    }
+  },
+
+  'mute' : function(){
+    return Template.instance().mute.get();
+  },
+
+  'powerButtonData' : function(){
+    return {
+      active: Template.instance().mute.get(),
+      // className: 'toggle-mute',
+      iconName: 'power-off',
+      handleClick: Template.instance().togglePower,
+    }
+  },
+
+  'gearButtonData' : function(){
+    return {
+      active: (FlowRouter.getQueryParam('sample') === Template.instance().data.sampleId),
+      // className: 'select-sample',
+      iconName: 'cog',
+      handleClick: Template.instance().selectSample,
     }
   },
 
@@ -19,6 +45,7 @@ Template.SampleSlot.helpers({
   'loadData' : function(){
     return {
       samples: Samples.find(),
+      selectedSample: Template.instance().sample(),
       sampleIndex: Template.instance().data.sampleIndex,
       handleLoad: Template.instance().data.handleLoad
     }

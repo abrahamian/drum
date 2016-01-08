@@ -8,6 +8,7 @@ Template._soundsList.events({
   'click .remove-sound' : function(event, instance) {
     event.preventDefault();
     var soundId = this._id;
+    console.log('trying to remove sound', this);
     instance.data.handleRemove(soundId);
   }
 });

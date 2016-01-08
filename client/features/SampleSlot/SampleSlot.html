@@ -1,12 +1,44 @@
 <template name="SampleSlot">
-<div class="sample-slot">
-{{#if Template.subscriptionsReady }}
-  {{#if sample}}
-    <span> {{sampleId}} </span> {{> _triggerSample triggerData }}
-    {{> _unloadSample unloadData}}
-  {{else}}
-    {{> _loadSample loadData}}
-  {{/if}}
-{{/if}}
+<div class="sample-slot row {{#if mute}} mute {{/if}} ">
+  <div class="small-10 columns left-side">
+    {{#if sample}}
+      
+      {{#if sampleBufferLoaded }}
+        <div class="one-third-height">
+          {{sample._id}}
+        </div>
+
+        <div class="one-third-height">
+          <div class="row">
+            <div class="small-2 columns">
+              {{> _triggerSample triggerData }}
+            </div>
+            <div class="small-10 columns">
+              {{> _loadSample loadData}}
+            </div>
+          </div>
+        </div>
+      {{/if}}
+
+    {{else}}
+      <div>hi</div>
+      {{> _loadSample loadData}}
+    {{/if}}
+  </div>
+
+  <div class="small-2 columns controls">
+
+    <div class="control toggle-mute">
+      {{> _toggle powerButtonData }}
+    </div>
+
+    {{#unless mute}}
+      <div class="control select-sample">
+        {{> _toggle gearButtonData }}
+      </div>
+    {{/unless}}
+
+  </div>
+
 </div>
 </template>

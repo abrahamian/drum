@@ -1,13 +1,37 @@
 Template.SampleSlot.onCreated(function(){
   var instance = this;
+  console.log(this);
 
   instance.sample = function(){
     return Samples.findOne(instance.data.sampleId);
   };
 
+  instance.selectSample = function() {
+    FlowRouter.setQueryParams({ 'sample': instance.data.sampleId });
+  };
+
   instance.sampleBufferLoaded = new ReactiveVar(false);
 
   instance.bufferNode = DrumApp.audioContext.createBufferSource();
+
+  instance.onOffNode = DrumApp.audioContext.createGain();
+  
+  instance.bufferNode.connect(instance.onOffNode);
+  instance.onOffNode.connect(DrumApp.audioContext.destination);
+
+  instance.mute = new ReactiveVar(false);
+  
+  instance.togglePower = function(){
+    instance.mute.set(!instance.mute.get());
+  };
+
+  instance.autorun(function(){
+    if(instance.mute.get()){
+      instance.onOffNode.gain.value = 0;
+    } else {
+      instance.onOffNode.gain.value = 1;
+    }
+  });
 
   instance.schedulePlay = function(destination, time, velocity){
     instance.bufferNode = destination.context.createBufferSource();
@@ -67,7 +91,8 @@ Template.SampleSlot.onCreated(function(){
     instance.highPassFilter = new DrumApp.CustomFilter({context: DrumApp.audioContext, type: "highpass", bypassedFrequency: 0, frequency: instance.sample().filters.highPass.frequency, slope: instance.sample().filters.highPass.slope});
     instance.lowPassFilter = new DrumApp.CustomFilter({context: DrumApp.audioContext, type: "lowpass",  bypassedFrequency: 20000, frequency: instance.sample().filters.lowPass.frequency, slope: instance.sample().filters.highPass.slope});
     instance.highPassFilter.output().connect(instance.lowPassFilter.input());
-    instance.lowPassFilter.output().connect(DrumApp.audioContext.destination);
+    // instance.lowPassFilter.output().connect(DrumApp.audioContext.destination);
+    instance.lowPassFilter.output().connect(instance.onOffNode);
   };
 
   instance.autorun(function() {

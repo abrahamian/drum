@@ -1,6 +1,6 @@
 Template.SoundsBox.helpers({
   sounds: function() {
-    return Template.instance().sounds();
+    return Template.instance().sounds;
   },
 
   selectSound: function(){
@@ -13,7 +13,7 @@ Template.SoundsBox.helpers({
 
   soundsListData: function(){
     return {
-      sounds: Template.instance().sounds(),
+      sounds: Template.instance().sounds,
       handleSelect: Template.instance().selectSound,
       handleRemove: Template.instance().removeSound,
     }
