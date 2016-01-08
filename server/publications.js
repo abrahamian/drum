@@ -13,12 +13,16 @@ Meteor.publish("user/sounds", function(){
 });
 
 Meteor.publish("sound/samples", function(soundId){
-  var sound = Sounds.findOne(soundId);
-  if(this.userId == sound.creatorId){
+  //todo: work out why commentEd out code didn't work (couldn't locate sound even though sound was already created.)
+
+  // console.log('publishing samples for sound with id ', soundId);
+  // var sound = Sounds.findOne(soundId);
+  // console.log(sound);
+  // if(this.userId == sound.creatorId){
     return Samples.find({soundId: soundId});
-  } else {
-    this.ready();
-  }
+  // } else {
+    // this.ready();
+  // }
 });
 
 Meteor.publish("kit", function(kitId){
