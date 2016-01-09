@@ -1,5 +1,5 @@
 Template.MeasureBox.onCreated(function() {
-  console.log(Template.currentData());
+  // console.log(Template.currentData());
   var instance = this;
 
   instance.autorun(function(){
