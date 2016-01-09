@@ -11,7 +11,7 @@ Template.KitRack.helpers({
     return {
       sampleSlotData: {
         sampleIndex: sampleIndex,
-        sampleId: Template.instance().kit().sampleIds[sampleIndex],
+        sampleId: Template.instance().sampleIds.get(sampleIndex),
         handleUnload: Template.instance().unloadSample,
         handleLoad: Template.instance().loadSample,
       }
