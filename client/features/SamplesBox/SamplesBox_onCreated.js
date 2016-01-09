@@ -3,7 +3,7 @@ Template.SamplesBox.onCreated(function () {
   var parentCollectionName = Template.currentData().parentCollectionName.toLowerCase();
   var subscriptionName = parentCollectionName + "/samples";
   var parentId = Template.currentData().parentId;
-  console.log(subscriptionName, parentId);
+  // console.log(subscriptionName, parentId);
   instance.subscribe(subscriptionName, parentId);
 
   instance.samples = function () {
@@ -13,7 +13,7 @@ Template.SamplesBox.onCreated(function () {
       foreignKey = "creatorId";
     }
     filters[foreignKey] = Template.currentData().parentId;
-    console.log('in samples helpers. filters are:', filters);
+    // console.log('in samples helpers. filters are:', filters);
     return Samples.find(filters);
   };
 
