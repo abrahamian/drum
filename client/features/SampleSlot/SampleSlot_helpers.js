@@ -1,10 +1,18 @@
 Template.SampleSlot.helpers({
+  
   sample: function(){
     return Template.instance().sample();
   },
 
-  sampleBufferLoaded: function(){
-    return Template.instance().sampleBufferLoaded.get();
+  sampleLoaderData: function(){
+    return {
+      sample: Template.instance().sample,
+      setBuffer: Template.instance().setBuffer,
+    }
+  },
+
+  sampleLoaded: function(){
+    return Template.instance().sampleLoaded.get();
   },
   
   'triggerData': function(){

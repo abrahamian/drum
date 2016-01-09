@@ -2,8 +2,9 @@
 <div class="sample-slot row {{#if mute}} mute {{/if}} ">
   <div class="small-10 columns left-side">
     {{#if sample}}
-      
-      {{#if sampleBufferLoaded }}
+      {{> SampleLoader sampleLoaderData }}
+
+      {{#if sampleLoaded }}
         <div class="one-third-height">
           {{sample._id}}
         </div>
@@ -21,13 +22,14 @@
       {{/if}}
 
     {{else}}
+    
       <div>hi</div>
       {{> _loadSample loadData}}
+    
     {{/if}}
   </div>
 
   <div class="small-2 columns controls">
-
     <div class="control toggle-mute">
       {{> _toggle powerButtonData }}
     </div>
@@ -37,7 +39,6 @@
         {{> _toggle gearButtonData }}
       </div>
     {{/unless}}
-
   </div>
 
 </div>
