@@ -1,7 +1,9 @@
 <template name="MeasureBox">
-<div class="measure-box">
+<div class="measure-box row">
 {{#if Template.subscriptionsReady }}
-    {{> _measure measureData }}
-{{/if}}
+  <div class="small-12 columns">
+      {{> _measure measureData }}
+  </div>
+{{/if}}  
 </div>
 </template>

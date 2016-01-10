@@ -2,22 +2,18 @@
 <div class="drum-machine-box row">
 {{#if Template.subscriptionsReady }}
 
-  <!-- {{> TimeKeeper timeKeeperData }} -->
-
   <div class="small-8 columns">
-    <div class="row">
-      <div class="small-12 columns">
-        {{> MeasureBox measureId=drumMachine.measureId }}
-      </div>
-    </div>
-  
+    {{> MeasureBox measureId=drumMachine.measureId }}
+      
     <div class="row">
       <div class="small-6 columns">
         {{> TimeKeeper timeKeeperData }}
       </div>
       
       <div class="small-6 columns">
-        {{> _slider tempoSliderData }}
+        <div class="tempo-slider">
+          {{> _slider tempoSliderData }}
+        </div>
       </div>
 
     </div>

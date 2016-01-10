@@ -15,7 +15,6 @@ Template.DrumMachineBox.helpers({
 
   'tempoSliderData' : function(){
     return {
-      className: "tempo-slider",
       value: Template.instance().drumMachine().tempo,
       handleUpdate: Template.instance().updateTempo,
     }
