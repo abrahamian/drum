@@ -3,10 +3,6 @@ Template.KitRack.helpers({
     return Template.instance().kit();
   },
 
-  'sampleIndices' : function(){
-    return [0,1,2];
-  },
-
   'generateSampleSlotData' : function(sampleIndex){
     return {
       sampleSlotData: {
