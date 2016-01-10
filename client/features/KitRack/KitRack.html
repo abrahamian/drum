@@ -1,11 +1,11 @@
 <template name="KitRack">
 <div class="kit-rack">
 {{#if Template.subscriptionsReady }}
-  {{#each index in sampleIndices }}
-    {{#with generateSampleSlotData index }}
+  
+    {{#with generateSampleSlotData 0 }}
       {{> SampleSlot sampleSlotData }}
     {{/with}}
-  {{/each}}
+  
 {{/if}}
 </div>
 </template>
